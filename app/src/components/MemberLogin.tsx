@@ -16,6 +16,7 @@ export default function MemberLogin() {
   if (!showLogin) return null;
 
   const WP_API_URL = 'https://fpp.ykm.mycrazydomains.me/wp-json';
+  const REGISTER_URL = 'https://fpp.ykm.mycrazydomains.me/register.php';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,30 +56,22 @@ export default function MemberLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${WP_API_URL}/wp/v2/users`, {
+      const response = await fetch(REGISTER_URL, {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': 'Basic ' + btoa('admin:dragcentral2026') // You'll need to change this
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-          roles: ['subscriber']
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password })
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess('Registration successful! Please log in.');
+        setSuccess('Registration successful! You can now log in.');
         setIsRegistering(false);
         setUsername('');
         setEmail('');
         setPassword('');
       } else {
-        setError(data.message || 'Registration failed. Please try again.');
+        setError(data.error || 'Registration failed. Please try again.');
       }
     } catch (err) {
       setError('Network error. Please try again.');
