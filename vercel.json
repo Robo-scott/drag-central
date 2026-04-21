@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "drag-central-nz",
+  "framework": "vite",
+  "buildCommand": "cd app && npm run build",
+  "outputDirectory": "app/dist",
+  "installCommand": "cd app && npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
