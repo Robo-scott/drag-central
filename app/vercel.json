@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "drag-central-nz",
+  "builds": [
+    {
+      "src": "dist/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
